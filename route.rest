@@ -1,0 +1,29 @@
+GET http://localhost:3000/admin
+
+###
+
+GET http://localhost:3000/admin/65f9045e9f4ec20f49bc335d
+
+###
+
+POST http://localhost:3000/admin/skill-post
+Content-Type: application/json
+
+{
+    "skillName": "HTML",
+    "percentage": "90"
+}
+
+###
+
+PATCH http://localhost:3000/admin/skill-update/65f9045e9f4ec20f49bc335d
+Content-Type: application/json
+
+{
+    "skillName": "PHP"
+}
+
+
+###
+
+DELETE http://localhost:3000/admin/skill-delete/65f903740982de065695c4da

@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -6,7 +8,7 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var adminRouter = require('./routes/admin');
 const { error } = require('console');
 
 var app = express();
@@ -22,13 +24,15 @@ app.use(cookieParser());
 app.use(express.static("public"));
 
 app.use('/', indexRouter); 
-app.use('/users', usersRouter);
+app.use('/admin', adminRouter);
 
-mongoose.connect('mongodb://localhost/personal', {useNewUrlParser: true});
+mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true});
 const db = mongoose.connection;
 
 db.on(error, (error) => console.error(error));
 db.once('open', () => console.log("Connected to DB"));
+
+app.use(express.json());
 
 app.listen(3000, () => console.log("nodemon started"));
 
